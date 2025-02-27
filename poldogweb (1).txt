@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POLDOG - Polygon’s Meme Coin King</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-blue: #00ffff;
+            --neon-purple: #bc13fe;
+            --neon-pink: #ff1493;
+            --neon-yellow: #FFB703;
+            --cyber-black: #1E1E2E;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        body {
+            background: var(--cyber-black);
+            background-image: linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background: rgba(0, 0, 0, 0.9);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid var(--neon-blue);
+        }
+
+        .logo img {
+            width: 120px;
+            filter: drop-shadow(0 0 5px var(--neon-purple));
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background: var(--neon-blue);
+            margin: 5px;
+            transition: all 0.3s;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            color: var(--neon-blue);
+            font-size: 18px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--neon-pink);
+        }
+
+        /* Hero Section */
+        #hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 100vh;
+            padding: 100px 50px;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), var(--cyber-black));
+        }
+
+        .hero-text h1 {
+            font-size: 120px;
+            color: var(--neon-yellow);
+            text-shadow: 0 0 20px var(--neon-yellow), 0 0 40px var(--neon-purple);
+            animation: glow 2s infinite alternate;
+        }
+
+        .hero-text .tagline {
+            font-size: 28px;
+            color: var(--neon-blue);
+            margin: 20px 0;
+        }
+
+        .hero-text .description {
+            font-size: 20px;
+            color: var(--neon-blue);
+            margin: 20px 0;
+        }
+
+        .hero-text .btn {
+            display: inline-block;
+            font-size: 24px;
+            padding: 15px 40px;
+            background: linear-gradient(45deg, var(--neon-purple), var(--neon-blue));
+            color: #fff;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .hero-text .btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px var(--neon-blue);
+        }
+
+        .hero-visual img {
+            width: 400px;
+            border-radius: 50%;
+            border: 5px solid var(--neon-pink);
+            box-shadow: 0 0 30px var(--neon-pink);
+            animation: spin 10s linear infinite;
+        }
+
+        /* Tokenomics Section */
+        #tokenomics {
+            padding: 100px 50px;
+            text-align: center;
+        }
+
+        #tokenomics h2 {
+            font-size: 80px;
+            color: var(--neon-pink);
+            text-shadow: 0 0 15px var(--neon-pink);
+            margin-bottom: 50px;
+        }
+
+        .tokenomics-grid {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .tokenomics-card {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border: 2px solid var(--neon-blue);
+            border-radius: 15px;
+            width: 300px;
+            transition: transform 0.3s;
+        }
+
+        .tokenomics-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 20px var(--neon-blue);
+        }
+
+        .tokenomics-card h3 {
+            font-size: 36px;
+            color: var(--neon-yellow);
+        }
+
+        .tokenomics-card p {
+            font-size: 20px;
+            color: var(--neon-blue);
+        }
+
+        /* How to Buy Section */
+        #buy {
+            padding: 100px 50px;
+            background: rgba(0, 0, 0, 0.8);
+            text-align: center;
+        }
+
+        #buy h2 {
+            font-size: 80px;
+            color: var(--neon-blue);
+            text-shadow: 0 0 15px var(--neon-blue);
+            margin-bottom: 50px;
+        }
+
+        .exchange-rate {
+            font-size: 28px;
+            color: var(--neon-yellow);
+            margin-bottom: 20px;
+        }
+
+        .calculator {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .calculator p {
+            font-size: 24px;
+            color: var(--neon-yellow);
+        }
+
+        .calculator input {
+            padding: 10px;
+            font-size: 18px;
+            background: rgba(0, 0, 0, 0.8);
+            color: var(--neon-yellow);
+            border: 2px solid var(--neon-blue);
+            border-radius: 10px;
+            width: 200px;
+            text-align: center;
+        }
+
+        .buy-steps p {
+            font-size: 24px;
+            margin: 20px 0;
+        }
+
+        .buy-steps code {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 5px 15px;
+            border-radius: 10px;
+            color: var(--neon-purple);
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        .buy-steps .copy-btn {
+            background: var(--neon-blue);
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-left: 15px;
+            transition: background 0.3s;
+        }
+
+        .buy-steps .copy-btn:hover {
+            background: var(--neon-purple);
+        }
+
+        /* Join Section */
+        #join {
+            padding: 100px 50px;
+            text-align: center;
+        }
+
+        #join h2 {
+            font-size: 80px;
+            color: var(--neon-yellow);
+            text-shadow: 0 0 15px var(--neon-yellow);
+            margin-bottom: 30px;
+        }
+
+        .join-text {
+            font-size: 28px;
+            color: var(--neon-pink);
+            margin-bottom: 40px;
+        }
+
+        .social-buttons .btn {
+            display: inline-block;
+            font-size: 20px;
+            margin: 0 20px;
+            padding: 15px 30px;
+            background: linear-gradient(45deg, var(--neon-purple), var(--neon-blue));
+            color: #fff;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .social-buttons .btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px var(--neon-blue);
+        }
+
+        /* Footer */
+        footer {
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.9);
+            text-align: center;
+            border-top: 2px solid var(--neon-purple);
+        }
+
+        footer p {
+            font-size: 18px;
+        }
+
+        /* Animations */
+        @keyframes glow {
+            from { text-shadow: 0 0 20px var(--neon-yellow), 0 0 40px var(--neon-purple); }
+            to { text-shadow: 0 0 30px var(--neon-yellow), 0 0 60px var(--neon-purple); }
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Media Queries for Mobile */
+        @media (max-width: 768px) {
+            header {
+                padding: 20px;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            nav ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--cyber-black);
+            }
+
+            nav ul.open {
+                display: flex;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+                text-align: center;
+            }
+
+            #hero {
+                flex-direction: column;
+                padding: 50px 20px;
+            }
+
+            .hero-text h1 {
+                font-size: 60px;
+            }
+
+            .hero-text .tagline {
+                font-size: 20px;
+            }
+
+            .hero-text .description {
+                font-size: 16px;
+            }
+
+            .hero-visual img {
+                width: 200px;
+            }
+
+            #tokenomics {
+                padding: 50px 20px;
+            }
+
+            #tokenomics h2 {
+                font-size: 40px;
+            }
+
+            .tokenomics-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .tokenomics-card {
+                width: 80%;
+                margin-bottom: 20px;
+            }
+
+            #buy {
+                padding: 50px 20px;
+            }
+
+            #buy h2 {
+                font-size: 40px;
+            }
+
+            .exchange-rate {
+                font-size: 20px;
+            }
+
+            .calculator p {
+                font-size: 18px;
+            }
+
+            .calculator input {
+                width: 100%;
+                max-width: 200px;
+                font-size: 16px;
+            }
+
+            .buy-steps p {
+                font-size: 18px;
+            }
+
+            .wallet-address {
+                font-size: 14px;
+                word-break: break-all;
+            }
+
+            #join {
+                padding: 50px 20px;
+            }
+
+            #join h2 {
+                font-size: 40px;
+            }
+
+            .join-text {
+                font-size: 20px;
+            }
+
+            .social-buttons {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .social-buttons .btn {
+                margin: 10px 0;
+            }
+
+            footer p {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="poldog-logo.png" alt="Poldog Logo">
+        </div>
+        <div class="hamburger" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#tokenomics">Tokenomics</a></li>
+                <li><a href="#buy">Buy Now</a></li>
+                <li><a href="#join">Join Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="hero">
+        <div class="hero-text">
+            <h1>POLDOG</h1>
+            <p class="tagline">The Meme Coin Revolution on Polygon</p>
+            <p class="description">Poldog is not just another meme coin; it's a movement. Built on the lightning-fast Polygon network, Poldog combines the fun of memes with the power of DeFi. With a deflationary mechanism and community-driven growth, Poldog is set to take over the crypto world. Join the pack today!</p>
+            <a href="#buy" class="btn">Get $POLDOG Now</a>
+        </div>
+        <div class="hero-visual">
+            <img src="poldog-animation.gif" alt="Poldog Animation">
+        </div>
+    </section>
+
+    <section id="tokenomics">
+        <h2>TOKENOMICS</h2>
+        <div class="tokenomics-grid">
+            <div class="tokenomics-card">
+                <h3>1 BILLION</h3>
+                <p>Total Supply of $POLDOG</p>
+            </div>
+            <div class="tokenomics-card">
+                <h3>1% BURN</h3>
+                <p>Per Transaction</p>
+            </div>
+            <div class="tokenomics-card">
+                <h3>AIRDROPS</h3>
+                <p>Limited Time Hype</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="buy">
+        <h2>HOW TO BUY $POLDOG</h2>
+        <p class="exchange-rate">Exchange Rate: 1 $POL = 1,000,000 $POLDOG</p>
+        <div class="calculator">
+            <p>Enter $POL amount:</p>
+            <input type="number" id="polAmount" placeholder="0.01 - 100" min="0.01" max="100" step="0.01">
+            <p id="poldogAmount">You will receive: 0 $POLDOG</p>
+        </div>
+        <div class="buy-steps">
+            <p>1. Send 0.01 - 100 $POL to: <code><span class="wallet-address">0xb1a37c277986e13aa6c4f0763c2f06c4e9527d54</span></code> <button class="copy-btn" data-address="0xb1a37c277986e13aa6c4f0763c2f06c4e9527d54">Copy</button></p>
+            <p>2. Receive $POLDOG tokens automatically.</p>
+            <p>3. Add to wallet: <code><span class="wallet-address">0xC504f9154B2f563879c9E25Cd564A47975326737</span></code> <button class="copy-btn" data-address="0xC504f9154B2f563879c9E25Cd564A47975326737">Copy</button></p>
+        </div>
+    </section>
+
+    <section id="join">
+        <h2>JOIN THE PACK</h2>
+        <p class="join-text">Be part of the Poldog revolution. Connect with us now!</p>
+        <div class="social-buttons">
+            <a href="#" class="btn">Twitter</a>
+            <a href="#" class="btn">Telegram</a>
+            <a href="#" class="btn">Discord</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 Poldog - Powered by Polygon</p>
+    </footer>
+
+    <script>
+        // Hamburger Menu Toggle
+        function toggleMenu() {
+            const navUl = document.querySelector('nav ul');
+            const hamburger = document.querySelector('.hamburger');
+            navUl.classList.toggle('open');
+            hamburger.classList.toggle('active');
+        }
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Copy to Clipboard
+        document.querySelectorAll('.copy-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const address = btn.getAttribute('data-address');
+                navigator.clipboard.writeText(address).then(() => {
+                    btn.textContent = 'Copied!';
+                    setTimeout(() => btn.textContent = 'Copy', 2000);
+                });
+            });
+        });
+
+        // Calculator
+        document.getElementById('polAmount').addEventListener('input', function() {
+            const pol = parseFloat(this.value);
+            const poldogAmount = document.getElementById('poldogAmount');
+            if (!isNaN(pol) && pol >= 0.01 && pol <= 100) {
+                const poldog = pol * 1000000;
+                poldogAmount.textContent = `You will receive: ${poldog.toLocaleString()} $POLDOG`;
+            } else {
+                poldogAmount.textContent = 'Please enter a valid amount between 0.01 and 100 $POL';
+            }
+        });
+    </script>
+</body>
+</html>
